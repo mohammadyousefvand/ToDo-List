@@ -61,13 +61,13 @@ main {
 /* list item li */
 .li-item-todo-list {
     width: 320px;
-    height: 70px;
-    line-height: 70px;
     background-color: var(--white);
     text-align: center;
     align-items: center;
     justify-content: space-between;
-    padding: 0 15px;
+    align-items: center;
+    border-left: 5px solid #ff4800;
+    padding: 20px 15px;
     margin: 10px 0;
     display: flex;
     font-size: 18px;
@@ -77,6 +77,7 @@ main {
 .list-todo i {
     cursor: pointer;
     color: var(--main-color);
+    padding-left: 10px;
 }
 
 /* add */

@@ -18,7 +18,7 @@ let submit = $.querySelector('.submit')
 function addNewTodoItem(newTodoValue) {
     // create new todo
     let newliItem = document.createElement('li')
-    let newtextItem = document.createElement('span')
+    let newtextItem = document.createElement('p')
     let newIconItem = document.createElement('i')
 
     // delete item
