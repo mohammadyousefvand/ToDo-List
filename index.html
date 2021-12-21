@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo-list</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ebda61e3fa.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- header -->
+    <header class="header">
+        <h1>Todo
+            <i class="fa fa-check"></i>
+        </h1>
+    </header>
+    <!-- main -->
+    <main>
+        <div class="no-todo">
+            <img src="images/undraw_to_do_list_re_9nt7.svg" alt="Todo">
+            <p class="no-todo-text">You're all done for today!</p>
+        </div>
+        <!-- list todo -->
+        <ul class="list-todo">
+
+        </ul>
+        <!-- add -->
+        <div class="add-todo">
+            <span>+</span>
+        </div>
+    </main>
+    <!-- hide input -->
+    <div class="input-add-new-todo">
+        <input type="text" placeholder="Enter The New Todo..." class="input-main">
+        <input type="submit" value="Submit" class="submit">
+        <i class="fa fa-close close"></i>
+    </div>
+    <!-- modal Eror -->
+    <div class="modal">
+        Please fill out this field
+    </div>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
