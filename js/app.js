@@ -9,7 +9,7 @@ let close = $.querySelector('.close')
 let modal = $.querySelector('.modal')
 let image = $.querySelector('img')
 let textNoTodo = $.querySelector('.no-todo-text')
-let ulTodoList = $.querySelector('.list-todo')
+let boxTodoList = $.querySelector('.list-todo')
 let inputmain = $.querySelector('.input-main')
 let submit = $.querySelector('.submit')
 
@@ -17,7 +17,7 @@ let submit = $.querySelector('.submit')
 
 function addNewTodoItem(newTodoValue) {
     // create new todo
-    let newliItem = document.createElement('li')
+    let newItemTodo = document.createElement('div')
     let newtextItem = document.createElement('p')
     let newIconItem = document.createElement('i')
 
@@ -30,13 +30,13 @@ function addNewTodoItem(newTodoValue) {
     textNoTodo.style.display = 'none'
 
 
-    newliItem.setAttribute('class', 'li-item-todo-list')
+    newItemTodo.setAttribute('class', 'item-todo-list')
     newtextItem.setAttribute('class', 'text')
     newtextItem.innerHTML = newTodoValue
     newIconItem.setAttribute('class', 'fa fa-times-circle closeitem')
-    newliItem.append(newtextItem, newIconItem)
-    newliItem.style.display = 'flex'
-    ulTodoList.append(newliItem)
+    newItemTodo.append(newtextItem, newIconItem)
+    newItemTodo.style.display = 'flex'
+    boxTodoList.append(newItemTodo)
 }
 
 // ------ Event ------
