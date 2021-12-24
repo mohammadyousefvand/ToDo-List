@@ -83,7 +83,9 @@ main {
 .list-todo i {
     display: block;
     cursor: pointer;
-    padding-left: 10px;
+    padding-left: 15px;
+    font-size: 18px;
+
 }
 .closeitem{
     color: var(--main-color);
