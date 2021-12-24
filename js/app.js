@@ -16,6 +16,20 @@ let submit = $.querySelector('.submit');
 
 // ---- function ----
 
+let allCover = [
+    'images/cover1.svg',
+    'images/cover2.svg',
+    'images/cover3.svg',
+    'images/cover4.svg',
+    'images/cover5.svg',
+    'images/cover6.svg'
+]
+
+let randomimage = Math.floor(Math.random() * allCover.length)
+
+image.setAttribute('src' , allCover[randomimage])
+
+
 function addNewTodoItem(newTodoValue) {
     // create new todo
     let newItemTodo = $.createElement('div');
