@@ -1,5 +1,7 @@
 <h2>ToDo List</h2>
 
+Responsive
+
 Preview : https://mohammadyousefvand.github.io/ToDo-List/
 
 <hr />
