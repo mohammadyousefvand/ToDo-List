@@ -2,56 +2,96 @@
 
 let $ = document
 
-let inputNewTodo = $.querySelector('.input-add-new-todo')
-let addNewTodo = $.querySelector('.add-todo')
-
-let close = $.querySelector('.close')
-let modal = $.querySelector('.modal')
-let image = $.querySelector('img')
-let textNoTodo = $.querySelector('.no-todo-text')
-let boxTodoList = $.querySelector('.list-todo')
-let inputmain = $.querySelector('.input-main')
-let submit = $.querySelector('.submit')
+let inputNewTodo = $.querySelector('.input-add-new-todo');
+let addNewTodo = $.querySelector('.add-todo');
+let close = $.querySelector('.close');
+let modal = $.querySelector('.modal');
+let downMassage = $.querySelector('.down-masage')
+let deleteMassage = $.querySelector('.delete')
+let image = $.querySelector('img');
+let textNoTodo = $.querySelector('.no-todo-text');
+let boxTodoList = $.querySelector('.list-todo');
+let inputmain = $.querySelector('.input-main');
+let submit = $.querySelector('.submit');
 
 // ---- function ----
 
 function addNewTodoItem(newTodoValue) {
     // create new todo
-    let newItemTodo = document.createElement('div')
-    let newtextItem = document.createElement('p')
-    let newIconItem = document.createElement('i')
+    let newItemTodo = $.createElement('div');
+    let newtextItem = $.createElement('p');
+    let IconBox = $.createElement('div')
+    let newIconItemDoIt = $.createElement('i')
+
+    newIconItemDoIt.addEventListener('click' , function () {
+
+        let isDo = false
+
+        if (isDo == false) {
+            newItemTodo.style.background = '#009918'
+            newtextItem.style.color = '#fff'
+            newtextItem.style.textDecoration = 'line-through'
+            newIconItemDoIt.style.color = '#fff'
+            newIconItemClose.style.color = '#fff'
+            isDo = true
+        }
+
+        downMassage.classList.add('show-massage')
+
+        setTimeout(function () {
+            downMassage.classList.remove('show-massage')
+        } ,2000)
+    })
+
+    let newIconItemClose = $.createElement('i');
 
     // delete item
-    newIconItem.addEventListener('click', function (event) {
-        event.target.parentElement.remove()
-    })
+    newIconItemClose.addEventListener('click', function (event) {
+        event.target.parentElement.parentElement.remove()
+
+        deleteMassage.classList.add('show-delete')
+
+        setTimeout(function () {
+            deleteMassage.classList.remove('show-delete')
+        } ,2000)
+    });
     // image
-    image.style.display = 'none'
-    textNoTodo.style.display = 'none'
+    image.style.display = 'none';
+    textNoTodo.style.display = 'none';
 
 
-    newItemTodo.setAttribute('class', 'item-todo-list')
-    newtextItem.setAttribute('class', 'text')
+    newItemTodo.setAttribute('class', 'item-todo-list');
+    newtextItem.setAttribute('class', 'text');
     newtextItem.innerHTML = newTodoValue
-    newIconItem.setAttribute('class', 'fa fa-times-circle closeitem')
-    newItemTodo.append(newtextItem, newIconItem)
+    IconBox.setAttribute('class', 'iconbox')
+    newIconItemClose.setAttribute('class', 'fa fa-times-circle closeitem');
+    newIconItemDoIt.setAttribute('class', 'fa fa-check-circle do-it')
+    IconBox.append(newIconItemDoIt, newIconItemClose)
+    newItemTodo.append(newtextItem, IconBox)
     newItemTodo.style.display = 'flex'
-    boxTodoList.append(newItemTodo)
+    boxTodoList.append(newItemTodo);
 }
+
+
 
 // ------ Event ------
 
 addNewTodo.addEventListener('click', function () {
     inputNewTodo.classList.toggle('active')
-})
+});
 
 close.addEventListener('click', function () {
     inputNewTodo.classList.toggle('active')
-})
+});
 
+window.addEventListener('keydown', function (event) {
+    if (event.keyCode == 27) {
+        inputNewTodo.classList.remove('active')
+    }
+});
 
 submit.addEventListener('click', function () {
-    let newTodoValue = inputmain.value.trim()
+    let newTodoValue = inputmain.value.trim();
 
     if (newTodoValue) {
         inputmain.value = ''
@@ -66,9 +106,9 @@ submit.addEventListener('click', function () {
 
         }, 4000)
     }
-})
+});
 inputmain.addEventListener('keydown', function (event) {
-    let newTodoValue = event.target.value.trim()
+    let newTodoValue = event.target.value.trim();
 
 
     if (event.key === 'Enter') {
@@ -89,4 +129,4 @@ inputmain.addEventListener('keydown', function (event) {
             }, 4000)
         }
     }
-})
+});

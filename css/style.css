@@ -52,7 +52,10 @@ main {
     font-size: 25px;
     display: block;
 }
-
+.actives{
+    text-decoration: line-through;
+    color: #fff;
+}
 /* list ul */
 .list-todo {
     text-align: center;
@@ -69,13 +72,24 @@ main {
     border-left: 5px solid #ff4800;
     padding: 20px 15px;
     margin: 10px 0;
-    font-size: 18px;
+    font-size: 16px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
+
+.iconbox{
+    display: flex;
+    flex-direction: row;
+}
 .list-todo i {
+    display: block;
     cursor: pointer;
-    color: var(--main-color);
     padding-left: 10px;
+}
+.closeitem{
+    color: var(--main-color);
+}
+.do-it{
+    color: #00b315;
 }
 
 /* add */
@@ -161,6 +175,42 @@ input[type=submit] {
     top: 40px;
     right: -100%;
 }
+.down-masage{
+    width: 120px;
+    height: 50px;
+    background-color: var(--white);
+    text-align: center;
+    line-height: 50px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    border-right: 5px solid #00b315;
+    position: fixed;
+    top: 40px;
+    right: -100%;
+}
+.down-masage p span {
+    color: #00b315;
+}
+.delete{
+    width: 120px;
+    height: 50px;
+    background-color: var(--white);
+    text-align: center;
+    line-height: 50px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    border-right: 5px solid var(--main-color);
+    position: fixed;
+    top: 40px;
+    right: -100%;
+}
+.delete p span {
+    color: var(--main-color);
+}
+.show-delete{
+    right: 20px;
+}
+.show-massage{
+    right: 20px;
+}
 
 .show {
     right: 20px;
@@ -196,3 +246,5 @@ input[type=submit] {
         font-size: 18px;
     }
 }
+
+/* #007512 */
