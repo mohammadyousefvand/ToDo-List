@@ -70,7 +70,7 @@ main {
     justify-content: space-between;
     align-items: center;
     border-left: 5px solid #ff4800;
-    padding: 20px 15px;
+    padding: 25px 15px;
     margin: 10px 0;
     font-size: 16px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -83,8 +83,8 @@ main {
 .list-todo i {
     display: block;
     cursor: pointer;
-    padding-left: 15px;
-    font-size: 18px;
+    padding-left: 20px;
+    font-size: 22px;
 
 }
 .closeitem{
