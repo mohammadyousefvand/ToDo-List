@@ -25,9 +25,11 @@ let allCover = [
     'images/cover6.svg'
 ]
 
+let isDo = true
+
 let randomimage = Math.floor(Math.random() * allCover.length)
 
-image.setAttribute('src' , allCover[randomimage])
+image.setAttribute('src', allCover[randomimage])
 
 
 function addNewTodoItem(newTodoValue) {
@@ -36,26 +38,6 @@ function addNewTodoItem(newTodoValue) {
     let newtextItem = $.createElement('p');
     let IconBox = $.createElement('div')
     let newIconItemDoIt = $.createElement('i')
-
-    newIconItemDoIt.addEventListener('click' , function () {
-
-        let isDo = false
-
-        if (isDo == false) {
-            newItemTodo.style.background = '#009918'
-            newtextItem.style.color = '#fff'
-            newtextItem.style.textDecoration = 'line-through'
-            newIconItemDoIt.style.color = '#fff'
-            newIconItemClose.style.color = '#fff'
-            isDo = true
-        }
-
-        downMassage.classList.add('show-massage')
-
-        setTimeout(function () {
-            downMassage.classList.remove('show-massage')
-        } ,2000)
-    })
 
     let newIconItemClose = $.createElement('i');
 
@@ -67,7 +49,7 @@ function addNewTodoItem(newTodoValue) {
 
         setTimeout(function () {
             deleteMassage.classList.remove('show-delete')
-        } ,2000)
+        }, 2000)
     });
     // image
     image.style.display = 'none';
@@ -84,6 +66,33 @@ function addNewTodoItem(newTodoValue) {
     newItemTodo.append(newtextItem, IconBox)
     newItemTodo.style.display = 'flex'
     boxTodoList.append(newItemTodo);
+
+    newIconItemDoIt.addEventListener('click', function () {
+
+        if (isDo) {
+            newItemTodo.style.background = '#009918'
+            newtextItem.style.cssText = 'color : #fff;text-decoration : line-through;'
+            newIconItemDoIt.style.color = '#fff'
+            newIconItemClose.style.color = '#fff'
+
+            downMassage.classList.add('show-massage')
+
+            setTimeout(function () {
+                downMassage.classList.remove('show-massage')
+            }, 2000)
+
+            isDo = false
+
+        } else {
+
+            newItemTodo.style.background = '#fff'
+            newtextItem.style.cssText = 'color : #000;'
+            newIconItemDoIt.style.color = '#009918'
+            newIconItemClose.style.color = '#ff4800'
+            
+            isDo = true
+        }
+    })
 }
 
 
