@@ -54,6 +54,15 @@ function addNewTodoItem(newTodoValue) {
         setTimeout(function () {
             deleteMassage.classList.remove('show-delete')
         }, 2000)
+
+        setTimeout(function () {
+
+            if (boxTodoList.innerHTML === '') {
+                image.style.display = 'block';
+                textNoTodo.style.display = 'block';
+            }
+        
+        }, 600)
     });
     // image
     image.style.display = 'none';
