@@ -17,6 +17,7 @@ const themeImage = $.querySelector('.theme')
 const palletColor = $.querySelector('.pallet-theme')
 const closePallete = $.querySelector('.close-pallet')
 const buttonColor = $.querySelectorAll('.btn')
+const clearAll = $.querySelector('.clear-all')
 
 
 // ---- function ----
@@ -47,7 +48,8 @@ function addNewTodoItem(newTodoValue) {
 
     // delete item
     newIconItemClose.addEventListener('click', function (event) {
-        event.target.parentElement.parentElement.remove()
+        let thisTodo = event.target.parentElement.parentElement
+        thisTodo.classList.add('close-Todos')
 
         deleteMassage.classList.add('show-delete')
 
@@ -56,17 +58,21 @@ function addNewTodoItem(newTodoValue) {
         }, 2000)
 
         setTimeout(function () {
+            thisTodo.remove()
 
             if (boxTodoList.innerHTML === '') {
+
+                clearAll.style.display = 'none'
                 image.style.display = 'block';
                 textNoTodo.style.display = 'block';
             }
-        
+
         }, 600)
     });
     // image
     image.style.display = 'none';
     textNoTodo.style.display = 'none';
+    clearAll.style.display = 'block'
 
 
     newItemTodo.setAttribute('class', 'item-todo-list');
@@ -165,6 +171,20 @@ inputmain.addEventListener('keydown', function (event) {
         }
     }
 });
+
+clearAll.addEventListener('click', function () {
+
+    boxTodoList.innerHTML = ''
+
+    setTimeout(function () {
+
+        clearAll.style.display = 'none'
+        image.style.display = 'block';
+        textNoTodo.style.display = 'block';
+
+    }, 600)
+
+})
 
 function openPalleteTheme() {
     palletColor.classList.add('show-pallet')

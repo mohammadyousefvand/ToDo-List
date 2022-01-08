@@ -44,7 +44,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 50px 40px 100px;
+    padding: 30px 40px 100px;
 }
 
 /* image */
@@ -104,6 +104,20 @@ main {
 
 .do-it {
     color: #00b315;
+}
+
+.clear-all{
+    width: 320px;
+    background-color: var(--main-color);
+    padding: 12px 15px;
+    border-radius: 5px;
+    color: var(--white);
+    margin: 20px 0;
+    display: none;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 /* add */
@@ -268,6 +282,10 @@ input[type=submit] {
 .close-pallet {
     font-size: 24px;
 }
+
+.close-Todos{
+    transform: translateX(-150%) !important;
+} 
 
 .btn:hover {
     opacity: .8;
