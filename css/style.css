@@ -85,6 +85,10 @@ main {
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
+.active {
+    background-color: #00b315;
+}
+
 .iconbox {
     display: flex;
     flex-direction: row;
@@ -106,7 +110,11 @@ main {
     color: #00b315;
 }
 
-.clear-all{
+.active {
+    color: #fff;
+}
+
+.clear-all {
     width: 320px;
     background-color: var(--main-color);
     padding: 12px 15px;
@@ -238,14 +246,6 @@ input[type=submit] {
     color: #ff3c00;
 }
 
-.show-delete {
-    right: 20px;
-}
-
-.show-massage {
-    right: 20px;
-}
-
 .show {
     right: 20px;
 }
@@ -283,9 +283,9 @@ input[type=submit] {
     font-size: 24px;
 }
 
-.close-Todos{
+.close-Todos {
     transform: translateX(-150%) !important;
-} 
+}
 
 .btn:hover {
     opacity: .8;

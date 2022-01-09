@@ -1,12 +1,11 @@
 // --- select ---
-
 let $ = document
 
 const inputNewTodo = $.querySelector('.input-add-new-todo');
 const addNewTodo = $.querySelector('.add-todo');
 const close = $.querySelector('.close');
 const modal = $.querySelector('.modal');
-const downMassage = $.querySelector('.down-masage')
+const doneMassage = $.querySelector('.down-masage')
 const deleteMassage = $.querySelector('.delete')
 const image = $.querySelector('.cover');
 const textNoTodo = $.querySelector('.no-todo-text');
@@ -19,9 +18,9 @@ const closePallete = $.querySelector('.close-pallet')
 const buttonColor = $.querySelectorAll('.btn')
 const clearAll = $.querySelector('.clear-all')
 
+arrayTodo = []
 
-// ---- function ----
-
+// Random Image Background
 let allCover = [
     'images/cover1.svg',
     'images/cover3.svg',
@@ -30,88 +29,164 @@ let allCover = [
     'images/cover6.svg'
 ]
 
-let isDo = true
-
 let randomimage = Math.floor(Math.random() * allCover.length)
-
 image.setAttribute('src', allCover[randomimage])
 
+// ---- function ----
 
-function addNewTodoItem(newTodoValue) {
-    // create new todo
-    let newItemTodo = $.createElement('div');
-    let newtextItem = $.createElement('p');
-    let IconBox = $.createElement('div')
-    let newIconItemDoIt = $.createElement('i')
+//Create New Todo And Push In Array
+function addNewTodoItem(newTodo) {
 
-    let newIconItemClose = $.createElement('i');
+    let newTodoObject = {
+        id: arrayTodo.length + 1,
+        title: newTodo,
+        complated: false
+    }
 
-    // delete item
-    newIconItemClose.addEventListener('click', function (event) {
-        let thisTodo = event.target.parentElement.parentElement
-        thisTodo.classList.add('close-Todos')
+    arrayTodo.push(newTodoObject)
 
-        deleteMassage.classList.add('show-delete')
+    setlocalUpdated(arrayTodo)
+    generatorDom(arrayTodo)
+}
 
-        setTimeout(function () {
-            deleteMassage.classList.remove('show-delete')
-        }, 2000)
+//Update localStorage 
+function setlocalUpdated(arrayTodo) {
+    localStorage.setItem('Todos', JSON.stringify(arrayTodo))
+}
 
-        setTimeout(function () {
-            thisTodo.remove()
+//Create Dom Element From Array
+function generatorDom(arrayTodo) {
 
-            if (boxTodoList.innerHTML === '') {
+    boxTodoList.innerHTML = ''
 
-                clearAll.style.display = 'none'
-                image.style.display = 'block';
-                textNoTodo.style.display = 'block';
-            }
+    let newItemTodo, newtextItem, IconBox, newIconItemDoIt, newIconItemClose
 
-        }, 600)
-    });
-    // image
-    image.style.display = 'none';
-    textNoTodo.style.display = 'none';
-    clearAll.style.display = 'block'
+    arrayTodo.forEach(function (todo) {
+        // create new todo
+        newItemTodo = $.createElement('div');
+        newtextItem = $.createElement('p');
+        IconBox = $.createElement('div')
+        newIconItemDoIt = $.createElement('i')
+        newIconItemClose = $.createElement('i');
 
+        newItemTodo.setAttribute('class', 'item-todo-list');
+        newtextItem.setAttribute('class', 'text');
+        newtextItem.innerHTML = todo.title
+        IconBox.setAttribute('class', 'iconbox')
+        newIconItemClose.setAttribute('class', 'fa fa-times-circle closeitem');
+        newIconItemClose.addEventListener('click', function (event) {
 
-    newItemTodo.setAttribute('class', 'item-todo-list');
-    newtextItem.setAttribute('class', 'text');
-    newtextItem.innerHTML = newTodoValue
-    IconBox.setAttribute('class', 'iconbox')
-    newIconItemClose.setAttribute('class', 'fa fa-times-circle closeitem');
-    newIconItemDoIt.setAttribute('class', 'fa fa-check-circle do-it')
-    IconBox.append(newIconItemDoIt, newIconItemClose)
-    newItemTodo.append(newtextItem, IconBox)
-    newItemTodo.style.display = 'flex'
-    boxTodoList.append(newItemTodo);
-
-    newIconItemDoIt.addEventListener('click', function () {
-
-        if (isDo) {
-            newItemTodo.style.background = '#009918'
-            newtextItem.style.cssText = 'color : #fff;text-decoration : line-through;'
-            newIconItemDoIt.style.color = '#fff'
-            newIconItemClose.style.color = '#fff'
-
-            downMassage.classList.add('show-massage')
+            //Animation When Delete Todo
+            newItemTodo.classList.add('close-Todos')
 
             setTimeout(function () {
-                downMassage.classList.remove('show-massage')
+                removeItemTodo(todo.id)
+            }, 600)
+        })
+
+        newIconItemDoIt.setAttribute('class', 'fa fa-check-circle do-it')
+        newIconItemDoIt.setAttribute('onclick', 'complateTodosHandler(' + todo.id + ')')
+        IconBox.append(newIconItemDoIt, newIconItemClose)
+        newItemTodo.append(newtextItem, IconBox)
+        newItemTodo.style.display = 'flex'
+        boxTodoList.append(newItemTodo);
+
+        //Check Todo In Dom
+        checkAnyTodos()
+
+        //Check Complate Todo And Set Style For Box
+        if (todo.complated == true) {
+            newItemTodo.classList.add('active')
+            newIconItemDoIt.classList.add('active')
+            newIconItemClose.classList.add('active')
+            newtextItem.style.textDecoration = 'line-through'
+
+            //Show modal Massege 
+            doneMassage.classList.add('show')
+
+            //Hide Modal Massege After 2/s
+            setTimeout(function () {
+                doneMassage.classList.remove('show')
             }, 2000)
-
-            isDo = false
-
-        } else {
-
-            newItemTodo.style.background = '#fff'
-            newtextItem.style.cssText = 'color : #000;'
-            newIconItemDoIt.style.color = '#009918'
-            newIconItemClose.style.color = '#ff4800'
-
-            isDo = true
         }
     })
+}
+
+//Check Any Todo In Dom 
+function checkAnyTodos() {
+
+    if (boxTodoList.innerHTML == '') {
+        clearAll.style.display = 'none'
+        image.style.display = 'block';
+        textNoTodo.style.display = 'block';
+    } else {
+        clearAll.style.display = 'block'
+        image.style.display = 'none';
+        textNoTodo.style.display = 'none';
+    }
+}
+//Complate Todo After Click
+function complateTodosHandler(todosId) {
+    arrayTodo.forEach(function (todo) {
+        if (todosId == todo.id) {
+            todo.complated = !todo.complated
+        }
+    })
+    //Update
+    setlocalUpdated(arrayTodo)
+    generatorDom(arrayTodo)
+}
+
+//Remove Todo In Array
+function removeItemTodo(todosId) {
+
+    let localRemoveUpdate = JSON.parse(localStorage.getItem('Todos'))
+
+    arrayTodo = localRemoveUpdate
+
+    let indexRemove = arrayTodo.findIndex(function (todo) {
+        return todosId == todo.id
+    })
+
+    arrayTodo.splice(indexRemove, 1)
+
+    //Show Modal Massege
+    deleteMassage.classList.add('show')
+
+    //Hide Modal Massege
+    setTimeout(function () {
+        deleteMassage.classList.remove('show')
+    }, 2000)
+
+    //Update
+    generatorDom(arrayTodo)
+    checkAnyTodos()
+    setlocalUpdated(arrayTodo)
+}
+
+//Delete All Todo From Array & Dom & LocalStorage
+function clearallTodos() {
+
+    //Add Animation Style For Delete
+    boxTodoList.classList.add('close-Todos')
+    //Show Massege Delete
+    deleteMassage.classList.add('show')
+
+    setTimeout(function () {
+        arrayTodo = []
+        localStorage.removeItem('Todos')
+        generatorDom(arrayTodo)
+        checkAnyTodos()
+
+        //Remove Animation Style For Delete
+        boxTodoList.classList.remove('close-Todos')
+    }, 600)
+
+    //Hide Massege
+    setTimeout(function () {
+        deleteMassage.classList.remove('show')
+        
+    }, 2000)
 }
 
 // ------ Event ------
@@ -151,7 +226,6 @@ submit.addEventListener('click', function () {
 inputmain.addEventListener('keydown', function (event) {
     let newTodoValue = event.target.value.trim();
 
-
     if (event.key === 'Enter') {
         event.preventDefault()
 
@@ -172,20 +246,7 @@ inputmain.addEventListener('keydown', function (event) {
     }
 });
 
-clearAll.addEventListener('click', function () {
-
-    boxTodoList.innerHTML = ''
-
-    setTimeout(function () {
-
-        clearAll.style.display = 'none'
-        image.style.display = 'block';
-        textNoTodo.style.display = 'block';
-
-    }, 600)
-
-})
-
+//Theme Color And Save In localStorage
 function openPalleteTheme() {
     palletColor.classList.add('show-pallet')
 }
@@ -203,12 +264,29 @@ buttonColor.forEach(function (item) {
     })
 })
 
+//Recavery All Data From Local
 function loadThemeFromLocalStorage() {
+    // Theme and Todo
     let themeLoad = localStorage.getItem('theme')
 
     document.documentElement.style.setProperty('--main-color', themeLoad)
+
+    let localRecovery = JSON.parse(localStorage.getItem('Todos'))
+
+    if (localRecovery) {
+        arrayTodo = localRecovery
+    } else {
+        arrayTodo = []
+    }
+
+    //Update
+    generatorDom(arrayTodo)
+
+    //Hide Massege After Recavery
+    doneMassage.classList.remove('show')
 }
 
 themeImage.addEventListener('click', openPalleteTheme)
 closePallete.addEventListener('click', closePalleteColor)
 window.addEventListener('load', loadThemeFromLocalStorage)
+clearAll.addEventListener('click', clearallTodos)
